@@ -1,11 +1,11 @@
-"use-stric"
+"use-strict"
 const inputs = {};
 let canvas = document.getElementById("myChart");
 
 const bars = [];
 const colors = [];	
 const label = [];
-let canDraw = false;
+
 start();
 function start() {
     getUserInput();
@@ -16,16 +16,19 @@ function getUserInput() {
 
     inputs.barsCount = parseInt(prompt("Type the bars count"));
     inputs.maxItarations = parseInt(prompt("Type the max intarations"));;
+    inputs.sum = parseInt(prompt("Type how many ramdom numbers do you want to sum"));
 
 }
 
 function updateBarsState() {
     let i = 1;
     const resultUl = document.querySelector("#result");
+    
+    
     const interval = setInterval(()=>{
-        const ramdomNumber = getRandomArbitrary(0, inputs.barsCount);
+        const ramdomNumber = getRamdomNumber(inputs.sum);
         bars[ramdomNumber] += 1;
-        const porcent = (i/inputs.maxItarations*100).toFixed(0) + "%";
+        const porcent = (i/inputs.maxItarations*100).toFixed(0);
 
         renderDiv(porcent);
 
@@ -61,13 +64,25 @@ function updateBarsState() {
         i++;
     },1)
 
-    function getRandomArbitrary(min, max) {
-        return  Math.floor(Math.random() * (max - min) + min);
-      }
+    
+}
+
+function getRandomArbitrary(min, max) {
+    return  Math.floor(Math.random() * (max - min) + min);
+}
+
+
+function getRamdomNumber(n) {
+    let count = 0;
+    for (let i = 0; i < n; i++) {
+        count += getRandomArbitrary(0, inputs.barsCount);
+    }
+
+    return count;
 }
 
 function createDataStructure() {
-    const n = 1;
+    const n = inputs.sum;
     for (let i = 0; i < inputs.barsCount*n+2; i++) {
         bars[i] = 0;
         colors[i] = "rgb(0, 255, 30)";
@@ -78,8 +93,10 @@ function createDataStructure() {
 }
 
 function renderDiv(text) {
-    const div = document.querySelector("#porcent");
-    div.textContent = "";
-    div.textContent = text;
-}
+    const porcentP = document.getElementById("porcentP");
+    const n = parseInt(text);
+    const fill = document.getElementById("fill");
+    fill.style.width = n+"%";
 
+    porcentP.innerHTML = text+"%";
+}

@@ -4,11 +4,46 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: black
+        }
+
+        #canvasDiv {
+            width: 800;
+            height: 800;
+        }
+
+        #myChart {
+            height: 90%;
+            width: 90%;
+        }
+
+        #slider {
+            background-color: white;
+            height: 10px;
+            width: 600px;
+            border: 1px solid black
+        }
+
+        #fill {
+            background-color: greenyellow;
+            width: 0%;
+            height: 100%;
+        }
+    </style>
     <title>Ramdom numbers</title>
 </head>
 <body>
-        <canvas id="myChart" width="400" height="400"></canvas>
-        <p id="porcent"></p>
+        <div id="canvasDiv">
+            <canvas id="myChart"></canvas>
+        </div>
+        
+        <div id="container">
+            <p style="color:white" id="porcentP">0%</p>
+            <div id="slider">
+                <div id="fill"></div>
+            </div>
 </body>
 <script src="./main.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
